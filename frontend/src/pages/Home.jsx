@@ -12,7 +12,6 @@ function Home() {
   const fetchProducts = async () => {
     try {
       const res = await API.get("/products");
-
       setProducts(res.data);
     } catch (error) {
       console.log(error);
@@ -23,19 +22,54 @@ function Home() {
     <div
       style={{
         padding: "40px",
-        background: "#121212",
+        background: "#111827",
         minHeight: "100vh",
         color: "white",
       }}
     >
-      <h1 style={{ textAlign: "center", marginBottom: "40px" }}>
-        Products
-      </h1>
+      <div
+        style={{
+          textAlign: "center",
+          padding: "60px 20px",
+          marginBottom: "60px",
+          borderRadius: "20px",
+          background:
+            "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "3rem",
+            marginBottom: "15px",
+          }}
+        >
+          DevShop
+        </h1>
+
+        <p
+          style={{
+            fontSize: "1.2rem",
+            opacity: 0.9,
+          }}
+        >
+          Modern E-Commerce Platform Built with React, Node.js & AWS
+        </p>
+      </div>
+
+      <h2
+        style={{
+          textAlign: "center",
+          marginBottom: "30px",
+        }}
+      >
+        Featured Products
+      </h2>
 
       <div
         style={{
           display: "flex",
-          gap: "20px",
+          gap: "25px",
           flexWrap: "wrap",
           justifyContent: "center",
         }}
