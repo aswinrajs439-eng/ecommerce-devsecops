@@ -42,9 +42,17 @@ function Navbar() {
         </Link>
 
         <Link
+           to="/orders"
+           style={{ color: "white", textDecoration: "none"}}
+        >
+          Orders
+        </Link>
+
+        <Link
           to="/register"
           style={{ color: "white", textDecoration: "none" }}
         >
+
           Register
         </Link>
 

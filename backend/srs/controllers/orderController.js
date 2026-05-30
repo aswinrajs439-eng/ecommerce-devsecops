@@ -6,14 +6,9 @@ const placeOrder = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    // Get cart items
     const cartItems = await prisma.cartItem.findMany({
-      where: {
-        userId,
-      },
-      include: {
-        product: true,
-      },
+      where: { userId },
+      include: { product: true },
     });
 
     if (cartItems.length === 0) {
@@ -22,14 +17,12 @@ const placeOrder = async (req, res) => {
       });
     }
 
-    // Calculate total
     let total = 0;
 
     cartItems.forEach((item) => {
       total += item.product.price * item.quantity;
     });
 
-    // Create order
     const order = await prisma.order.create({
       data: {
         userId,
@@ -37,7 +30,6 @@ const placeOrder = async (req, res) => {
       },
     });
 
-    // Create order items
     for (const item of cartItems) {
       await prisma.orderItem.create({
         data: {
@@ -49,7 +41,6 @@ const placeOrder = async (req, res) => {
       });
     }
 
-    // Clear cart
     await prisma.cartItem.deleteMany({
       where: {
         userId,
@@ -69,6 +60,28 @@ const placeOrder = async (req, res) => {
   }
 };
 
+const getOrders = async (req, res) => {
+  try {
+    const orders = await prisma.order.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    res.json(orders);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to fetch orders",
+    });
+  }
+};
+
 module.exports = {
   placeOrder,
+  getOrders,
 };

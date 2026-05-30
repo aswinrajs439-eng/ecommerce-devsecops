@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-
+import Orders from "./pages/Orders";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -23,6 +23,7 @@ function App() {
 
         <Route path="/cart" element={<Cart />} />
 
+        <Route path="/orders" element={<Orders />} />
         <Route
           path="/cart"
           element={
